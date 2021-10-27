@@ -57,6 +57,8 @@
 local.sbt
 jitwatch.out
 
+.DS_Store
+
 # Used by the restarr/restarrFull commands as target directories
 /build-restarr/
 /target-restarr/
