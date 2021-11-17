@@ -1,47 +1,46 @@
 import org.scalatest.FunSuite
-import exceptions._
 
 class AccountTests extends FunSuite {
 
   val bank = new Bank()
 
   test("Test 01: Valid account withdrawal") {
-    val acc    = new Account(bank, 500)
+    val acc = new Account(bank, 500)
     val result = acc.withdraw(250)
     assert(acc.getBalanceAmount == 250)
     assert(result.isLeft)
   }
 
   test("Test 02: Invalid account withdrawal should throw exception") {
-    val acc    = new Account(bank, 500)
-  	val result = acc.withdraw(750)
+    val acc = new Account(bank, 500)
+    val result = acc.withdraw(750)
     assert(acc.getBalanceAmount == 500)
     assert(result.isRight)
   }
 
   test("Test 03: Withdrawal of negative amount should throw exception") {
-    val acc    = new Account(bank, 500)
+    val acc = new Account(bank, 500)
     val result = acc.withdraw(-100)
     assert(acc.getBalanceAmount == 500)
     assert(result.isRight)
   }
 
   test("Test 04: Valid account deposit") {
-    val acc    = new Account(bank, 500)
+    val acc = new Account(bank, 500)
     val result = acc.deposit(250)
     assert(acc.getBalanceAmount == 750)
     assert(result.isLeft)
   }
 
   test("Test 05: Deposit of negative amount should throw exception") {
-    val acc    = new Account(bank, 500)
+    val acc = new Account(bank, 500)
     val result = acc.deposit(-50)
     assert(acc.getBalanceAmount == 500)
     assert(result.isRight)
   }
 
   test("Test 06: Correct balance amount after several withdrawals and deposits") {
-    val acc   = new Account(bank, 50000)
+    val acc = new Account(bank, 50000)
     val first = Main.thread {
       for (i <- 0 until 100) {
         acc.withdraw(10); Thread.sleep(10)
